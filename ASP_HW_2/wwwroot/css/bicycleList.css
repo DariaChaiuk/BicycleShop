@@ -1,0 +1,14 @@
+﻿.popularity-star{
+    width: 15%;
+    height: 100%;
+}
+
+.home-image{
+    width: 60px;
+    margin-right: 2%;
+}
+
+.order-header{
+    font-size: 2rem !important;
+}
+
