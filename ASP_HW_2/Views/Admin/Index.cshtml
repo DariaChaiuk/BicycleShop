@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ASP_HW_2.Models.Bicycle>
+
+<body class="bg-secondary">
+    @Html.ActionLink("Add", "Create", "Admin", null, new { @class = "w-100 btn btn-light text-dark mb-3" })
+
+    @foreach (var bicycle in Model)
+    {
+        <div class="d-flex border border-danger rounded mb-2 p-3 align-items-center bg-white bicycle-container">
+            <div class="w-50  bicycle-small">
+                <img class="w-100 p-4" src="@bicycle.ImageUrl" />
+            </div>
+            <div class="w-50 d-flex flex-column align-items-center bicycle-small">
+                <div class="bg-dark text-light w-100 text-center rounded border mb-2">Info</div>
+                <div class="d-flex justify-content-between w-75">
+                    <div>Popularity:</div>
+                    <div class="d-flex justify-content-end">
+                        @if (bicycle.Popularity == ASP_HW_2.Models.Popularity.one)
+                        {
+                            <img class="popularity-star" src="https://clipart-best.com/img/star/star-clip-art-38.png" />
+                        }
+                        @if (bicycle.Popularity == ASP_HW_2.Models.Popularity.two)
+                        {
+                            @for (int i = 0; i < 2; i++)
+                            {
+                                <img class="popularity-star" src="https://clipart-best.com/img/star/star-clip-art-38.png" />
+                            }
+                        }
+                        @if (bicycle.Popularity == ASP_HW_2.Models.Popularity.three)
+                        {
+                            @for (int i = 0; i < 3; i++)
+                            {
+                                <img class="popularity-star" src="https://clipart-best.com/img/star/star-clip-art-38.png" />
+                            }
+                        }
+                        @if (bicycle.Popularity == ASP_HW_2.Models.Popularity.four)
+                        {
+                            @for (int i = 0; i < 4; i++)
+                            {
+                                <img class="popularity-star" src="https://clipart-best.com/img/star/star-clip-art-38.png" />
+                            }
+                        }
+                        @if (bicycle.Popularity == ASP_HW_2.Models.Popularity.five)
+                        {
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <img class="popularity-star" src="https://clipart-best.com/img/star/star-clip-art-38.png" />
+                            }
+                        }
+
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between w-75">
+                    <div>Model:</div>
+                    <div>@bicycle.Model</div>
+                </div>
+                <div class="d-flex justify-content-between w-75">
+                    <div>Price:</div>
+                    <div class="d-flex flex-nowrap">@bicycle.Price $</div>
+                </div>
+                <div class="bg-dark text-light w-100 text-center rounded border my-2">Details</div>
+                <div class="d-flex justify-content-between w-75">
+                    <div>Company:</div>
+                    <div>@bicycle.Company</div>
+                </div>
+                <div class="d-flex justify-content-between w-75">
+                    <div>Year:</div>
+                    <div>@bicycle.Year</div>
+                </div>
+                <div class="d-flex justify-content-between w-75 pb-2">
+                    <div>Country:</div>
+                    <div>@bicycle.Country</div>
+                </div>
+                <div class="d-flex justify-content-between w-75">
+                    @Html.ActionLink("Delete", "Delete", new { bicycleId = bicycle.BicycleId }, new { @class = "btn btn-secondary mt-3 w-50" })
+                    @Html.ActionLink("Edit", "Create", new { bicycleId = bicycle.BicycleId }, new { @class = "btn btn-secondary mt-3 w-25" })
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="d-flex justify-content-around">
+        @Html.ActionLink("Back", "Index", new { page = ViewBag.page - 1 }, new { @class = "btn btn-light text-dark" })
+        @if (!ViewBag.IsFinished)
+        {
+            @Html.ActionLink("Next", "Index", new { page = ViewBag.page + 1 }, new { @class = "btn btn-light text-dark" })
+        }
+
+    </div>
+</body>

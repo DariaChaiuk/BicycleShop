@@ -1,0 +1,32 @@
+﻿@model ASP_HW_2.Models.ViewModels.LoginViewModel
+
+<body class="bg-secondary">
+
+    <div class="w-100 d-flex justify-content-center">
+        <h1 class="text-light">Login</h1>
+    </div>
+    <form id="login" asp-action="Login" asp-controller="Account" asp-antiforgery="true" class="d-flex">
+        @Html.HiddenFor(x => x.ReturnUrl)
+        <div class="w-25 d-flex justify-content-center flex-column text-light">
+            @Html.LabelFor(x => x.Email)
+            @Html.LabelFor(x => x.Password)
+        </div>
+        <div class="w-50 d-flex justify-content-center flex-column">
+            @Html.TextBoxFor(x => x.Email, new { @type = "email" })
+            @Html.ValidationMessageFor(x => x.Email)
+
+            @Html.TextBoxFor(x => x.Password, new { @type = "password" })
+            @Html.ValidationMessageFor(x => x.Password)
+        </div>
+        <div>
+            @Html.LabelFor(x => x.RememberMe)
+            @Html.CheckBoxFor(x => x.RememberMe)
+            @Html.ValidationMessageFor(x => x.RememberMe)
+        </div>
+    </form>
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="w-100 d-flex justify-content-center mt-3">
+        <input form="login" type="submit" value="Login" class="btn btn-light w-50" />
+    </div>
+
+</body>

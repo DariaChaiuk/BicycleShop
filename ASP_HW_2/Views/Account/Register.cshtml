@@ -1,0 +1,31 @@
+﻿@model ASP_HW_2.Models.ViewModels.RegisterViewModel
+
+<body class="bg-secondary">
+
+    <div class="w-100 d-flex justify-content-center">
+        <h1 class="text-light">Register</h1>
+    </div>
+    <form id="login" asp-action="Register" asp-controller="Account" asp-antiforgery="true" class="d-flex">
+        <div class="w-25 d-flex justify-content-center flex-column text-light">
+            @Html.LabelFor(x => x.Email)
+            @Html.LabelFor(x => x.Password)
+            @Html.LabelFor(x => x.ConfirmPassword)
+        </div>
+        <div class="w-50 d-flex justify-content-center flex-column">
+            @Html.TextBoxFor(x => x.Email, new { @type = "email" })
+            @Html.ValidationMessageFor(x => x.Email)
+
+            @Html.TextBoxFor(x => x.Password, new { @type = "password" })
+            @Html.ValidationMessageFor(x => x.Password)
+
+
+            @Html.TextBoxFor(x => x.ConfirmPassword, new { @type = "password" })
+            @Html.ValidationMessageFor(x => x.ConfirmPassword)
+        </div>
+    </form>
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="w-100 d-flex justify-content-center mt-3">
+        <input form="login" type="submit" value="Register" class="btn btn-light w-50" />
+    </div>
+
+</body>

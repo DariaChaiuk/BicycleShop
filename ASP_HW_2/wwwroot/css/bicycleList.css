@@ -12,3 +12,54 @@
     font-size: 2rem !important;
 }
 
+.cart-small{
+    display: none;
+}
+
+.menu-buttons{
+    display: none;
+}
+
+@media (max-width: 990px) {
+    .inputs-container{
+        flex-direction: column;
+    }
+
+    .inputs-container input{
+        width: 100%!important;
+    }
+}
+
+@media (max-width: 850px) {
+    .home-image {
+        display: none;
+    }
+
+    .cart-small{
+        display: flex;
+    }
+}
+
+@media (max-width: 576px) {
+    .cart-small {
+        margin: 0!important;
+    }
+
+    .bicycle-container{
+        flex-direction: column!important;
+    }
+
+    .bicycle-small{
+        width: 100%!important
+    }
+}
+
+@media (max-width: 330px){
+    .login-buttons{
+        display: none;
+    }
+
+    .menu-buttons{
+        display: flex;
+    }
+}

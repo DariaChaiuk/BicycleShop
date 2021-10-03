@@ -1,0 +1,48 @@
+﻿@model ASP_HW_2.Models.ViewModels.AddUserViewModel
+
+<body class="bg-secondary">
+
+    <div class="w-100 d-flex justify-content-center">
+        <h1 class="text-light">Add new user</h1>
+    </div>
+
+    <form id="addUser" asp-action="AddUser" asp-controller="Admin" asp-antiforgery="true" class="d-flex">
+        <div class="w-25 d-flex justify-content-center flex-column text-light">
+
+            @Html.LabelFor(x => x.UserName, "User name")
+            @Html.LabelFor(x => x.Email)
+            @Html.LabelFor(x => x.Password)
+            @Html.LabelFor(x => x.ConfirmPassword, "Confirm password")
+            @Html.LabelFor(x => x.RoleName, "Choose user role")
+        </div>
+        <div class="w-50 d-flex justify-content-center flex-column">
+
+            @Html.TextBoxFor(x => x.UserName, new { @type = "text" })
+            @Html.ValidationMessageFor(x => x.UserName)
+
+            @Html.TextBoxFor(x => x.Email, new { @type = "email" })
+            @Html.ValidationMessageFor(x => x.Email)
+
+            @Html.TextBoxFor(x => x.Password, new { @type = "password" })
+            @Html.ValidationMessageFor(x => x.Password)
+
+            @Html.TextBoxFor(x => x.ConfirmPassword, new { @type = "password" })
+            @Html.ValidationMessageFor(x => x.ConfirmPassword)
+
+            <select id="role" name="RoleName" class="w-50">
+                @foreach (var item in ViewBag.Roles)
+                {
+
+                    <option value="@item.Name">@item.Name</option>
+
+                }
+            </select>
+
+        </div>
+    </form>
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="w-100 d-flex justify-content-center mt-3">
+        <input form="addUser" type="submit" value="Add user" class="btn btn-light w-50" />
+    </div>
+
+</body>

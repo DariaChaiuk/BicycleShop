@@ -1,5 +1,6 @@
 using ASP_HW_2.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,7 +14,7 @@ namespace ASP_HW_2
 {
     public class Program
     {
-        public static void Main(string[] args)
+        async public static Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 
@@ -22,6 +23,12 @@ namespace ASP_HW_2
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<BicycleContext>();
                 DbInitialize.Init(context);
+
+                var userManager = services.GetRequiredService<UserManager<User>>();
+                var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                await IdentityInitialize.Init(userManager, roleManager);
+                //var identityContext = services.GetRequiredService<IdentityContext>();
+                //IdentityInitialize.Init(identityContext);
             }
 
             host.Run();

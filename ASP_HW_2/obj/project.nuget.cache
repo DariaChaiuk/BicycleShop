@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "mICscTXYPhOtnLvNdTMHm9MbYzGyaswr6unbxVEIEC+KW4HbtwWJyn6z1o3JoicER1UMuB8v2PcTWuQ63NfYOg==",
+  "dgSpecHash": "7/22tXPwFDDgXih6jRBzkQtQ9pG4wIeL9CRmh6yx0LoXg8/uBxvlCnk/Chu/PrGK5ED4JVT8qm79bOW9Cb0Vow==",
   "success": true,
   "projectFilePath": "C:\\Users\\Daria\\source\\repos\\ASP_HW_2\\ASP_HW_2\\ASP_HW_2.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Daria\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.18\\microsoft.aspnetcore.cryptography.internal.3.1.18.nupkg.sha512",
+    "C:\\Users\\Daria\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.18\\microsoft.aspnetcore.cryptography.keyderivation.3.1.18.nupkg.sha512",
+    "C:\\Users\\Daria\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.18\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.18.nupkg.sha512",
     "C:\\Users\\Daria\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Daria\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.1\\microsoft.bcl.hashcode.1.1.1.nupkg.sha512",
     "C:\\Users\\Daria\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
@@ -20,6 +23,8 @@
     "C:\\Users\\Daria\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.1.18\\microsoft.extensions.configuration.binder.3.1.18.nupkg.sha512",
     "C:\\Users\\Daria\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.18\\microsoft.extensions.dependencyinjection.3.1.18.nupkg.sha512",
     "C:\\Users\\Daria\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.18\\microsoft.extensions.dependencyinjection.abstractions.3.1.18.nupkg.sha512",
+    "C:\\Users\\Daria\\.nuget\\packages\\microsoft.extensions.identity.core\\3.1.18\\microsoft.extensions.identity.core.3.1.18.nupkg.sha512",
+    "C:\\Users\\Daria\\.nuget\\packages\\microsoft.extensions.identity.stores\\3.1.18\\microsoft.extensions.identity.stores.3.1.18.nupkg.sha512",
     "C:\\Users\\Daria\\.nuget\\packages\\microsoft.extensions.logging\\3.1.18\\microsoft.extensions.logging.3.1.18.nupkg.sha512",
     "C:\\Users\\Daria\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.18\\microsoft.extensions.logging.abstractions.3.1.18.nupkg.sha512",
     "C:\\Users\\Daria\\.nuget\\packages\\microsoft.extensions.options\\3.1.18\\microsoft.extensions.options.3.1.18.nupkg.sha512",

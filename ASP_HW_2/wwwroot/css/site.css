@@ -69,3 +69,23 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.field-validation-error {
+   color:red;
+   text-align: right;    
+   width: 100%;
+}
+
+.input-validation-error {
+    border: 1px solid red;
+}
+
+.validation-summary-errors{
+    color: red;
+    display: flex;
+    justify-content: center;
+}
+
+.validation-summary-errors li{
+    list-style:none;
+}

@@ -1,0 +1,77 @@
+﻿@model ASP_HW_2.Models.Bicycle
+    <body class="bg-secondary">
+        <form class="d-flex border border-danger rounded mb-2 p-3 align-items-center bg-white" id="editForm" method="post">
+            <div class="w-50 d-flex flex-column mr-2">
+                @if (@Model != null)
+                {
+                    <img class="w-100 p-4" src="@Model.ImageUrl" />
+                }
+            <div class="d-flex justify-content-between w-100">
+                @Html.LabelFor(x => x.ImageUrl)
+                @Html.TextBoxFor(x => x.ImageUrl, new {@class="w-75"})
+
+            </div>
+            </div>
+      
+            <div class="w-50 d-flex flex-column align-items-center">
+                <div class="bg-dark text-light w-100 text-center rounded border mb-2">Info</div>
+                <div class="d-flex justify-content-between w-100">
+                    <label for="popularity">Popularity:</label>
+                    <select id="popularity" name="Popularity" class="w-50">
+                        @foreach (var item in (ASP_HW_2.Models.Popularity[])Enum.GetValues(typeof(ASP_HW_2.Models.Popularity)))
+                        {
+                            @if (@Model != null)
+                            {
+                                @if (item == @Model.Popularity)
+                                {
+                                    <option value="@item" selected>@item</option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="d-flex flex-column w-100">
+                    <div class="d-flex justify-content-between inputs-container">
+                        @Html.LabelFor(x => x.Model)
+                        @Html.TextBoxFor(x => x.Model, new { @class = "w-50" })
+                    </div>
+                        @Html.ValidationMessageFor(x => x.Model)
+                </div>
+                <div class="d-flex flex-column w-100">
+                    <div class="d-flex justify-content-between inputs-container">
+                        @Html.LabelFor(x => x.Price)
+                        @Html.TextBoxFor(x => x.Price, new { @class = "w-50"})
+                    </div>
+                        @Html.ValidationMessageFor(x => x.Price)
+                </div>
+                <div class="bg-dark text-light w-100 text-center rounded border my-2">Details</div>
+                <div class="d-flex flex-column w-100">
+                    <div class="d-flex justify-content-between inputs-container">
+                        @Html.LabelFor(x => x.Company)
+                        @Html.TextBoxFor(x => x.Company, new { @class = "w-50" })
+                    </div>
+                        @Html.ValidationMessageFor(x => x.Company)
+                </div>
+                <div class="d-flex flex-column w-100">
+                    <div class="d-flex justify-content-between inputs-container">
+                        @Html.LabelFor(x => x.Year)
+                        @Html.TextBoxFor(x => x.Year, new { @class = "w-50" })
+                    </div>
+                        @Html.ValidationMessageFor(x => x.Year)
+                </div>
+                <div class="d-flex flex-column pb-2 w-100">
+                    <div class="d-flex justify-content-between inputs-container">
+                        @Html.LabelFor(x => x.Country)
+                        @Html.TextBoxFor(x => x.Country, new { @class = "w-50" })
+                    </div>
+                        @Html.ValidationMessageFor(x => x.Country)
+                </div>
+            </div>
+        </form>
+        <input form="editForm" class="w-100" type="submit" value="Save" />
+    </body>
