@@ -1,6 +1,23 @@
 ﻿@model IEnumerable<ASP_HW_2.Models.Bicycle>
 
 <body class="bg-secondary">
+
+    <div class="mb-3">
+        <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuSort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sort options
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuSort">
+                <a asp-action="Index" asp-route-sortType="PopularityAsc" class="nav-link text-dark dropdown-item">Popularity Asc</a>
+                <a asp-action="Index" asp-route-sortType="ModelAsc" class="nav-link text-dark dropdown-item">Model Asc </a>
+                <a asp-action="Index" asp-route-sortType="PriceAsc" class="nav-link text-dark dropdown-item">Price Asc</a>
+                <a asp-action="Index" asp-route-sortType="CompanyAsc" class="nav-link text-dark dropdown-item">Company Asc </a>
+                <a asp-action="Index" asp-route-sortType="YearAsc" class="nav-link text-dark dropdown-item">Year Asc</a>
+                <a asp-action="Index" asp-route-sortType="CountryAsc" class="nav-link text-dark dropdown-item">Country Asc </a>
+            </div>
+        </div>
+    </div>
+
     @foreach (var bicycle in Model)
     {
         <div class="d-flex border border-danger rounded mb-2 p-3 align-items-center bg-white bicycle-container">

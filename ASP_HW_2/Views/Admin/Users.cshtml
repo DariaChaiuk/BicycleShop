@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ASP_HW_2.Models.User>
+
+<body class="bg-secondary">
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-light m-2" asp-controller="Admin" asp-action="AddUser">Add new user</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center text-light">Email</th>
+                <th class="text-center text-light">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td class="text-light">@user.Email</td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                          @using (Html.BeginForm())
+                          {
+
+                            @Html.Hidden("UserId", user.Id)
+
+                            <input type="submit" value="Delete" name="DeleteUser" formaction="DeleteUser" formmethod="post" class="btn btn-light" />
+                            <input type="submit" value="Edit user info" name="EditUser" formaction="EditUser" formmethod="get" class="btn btn-light" />
+
+                          }
+                        </div>
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</body>
+
+
+
+

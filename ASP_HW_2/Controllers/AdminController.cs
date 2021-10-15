@@ -125,7 +125,7 @@ namespace ASP_HW_2.Controllers
                         await userManager.AddToRoleAsync(await userManager.FindByEmailAsync(model.Email), model.RoleName);
                     }
 
-                    return RedirectToAction("EditUserRole");
+                    return RedirectToAction("Users");
                 }
                 else
                 {
@@ -136,33 +136,14 @@ namespace ASP_HW_2.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> EditUserRole()
+        public async Task<IActionResult> Users()
         {
-            var users = userManager.Users.ToList();
-            var result = new List<UserRole>();
-            foreach (var user in users)
-            {
-                var userRoles = await userManager.GetRolesAsync(user);
-                if (!userRoles.ToList().Exists(x => x == "SuperAdmin"))
-                {
-                    result.Add(new UserRole
-                    {
-                        UserId = user.Id,
-                        UserName = user.UserName,
-                        Email = user.Email,
-                        RoleName = userRoles.ToList()[0]
-                    });
-                }
-            }
-            var roles = roleManager.Roles.Where(x => x.Name != "SuperAdmin");
+           
+            var superAdmin = await userManager.GetUsersInRoleAsync("SuperAdmin");
 
-            var model = new EditUsersViewModel {
-    
-                Users = result,
-                Roles = roles
-            };
+            var users = userManager.Users.ToList().Where( x => !superAdmin.Contains(x));
 
-            return View(model);
+            return View(users);
         }
 
         [HttpPost]
@@ -175,23 +156,77 @@ namespace ASP_HW_2.Controllers
                 await userManager.DeleteAsync(user);
             }
 
-            return RedirectToAction("EditUserRole");
+            return RedirectToAction("Users");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> EditUserRole(string userId, string roleId)
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string userId)
         {
             if (ModelState.IsValid)
             {
-               var user = await userManager.FindByIdAsync(userId);
-               var role = await roleManager.FindByIdAsync(roleId);
+                var user = await userManager.FindByIdAsync(userId);
+             
+                var userRole = await userManager.GetRolesAsync(user);
 
-               var currentRoles = await userManager.GetRolesAsync(user);
-               await userManager.RemoveFromRolesAsync(user, currentRoles.ToList());
-               await userManager.AddToRoleAsync(user,await roleManager.GetRoleNameAsync(role));
+                var userView = new EditUserInfoViewModel
+                {
+                    UserName = user.UserName,
+                    UserId = user.Id,
+                    RoleName = userRole.ToList().FirstOrDefault(),
+                    Email = user.Email
+                };
+
+                ViewBag.Roles = roleManager.Roles.ToList().Where(x => x.Name != "SuperAdmin");
+
+                return View(userView);
             }
 
-            return RedirectToAction("EditUserRole");
+            return View("Users");
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> EditUser(EditUserInfoViewModel userInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByIdAsync(userInfo.UserId);
+                user.UserName = userInfo.UserName;
+                user.Email = userInfo.Email;
+                await userManager.UpdateAsync(user);
+
+                var role = await roleManager.FindByNameAsync(userInfo.RoleName);
+
+                var currentRoles = await userManager.GetRolesAsync(user);
+                await userManager.RemoveFromRolesAsync(user, currentRoles.ToList());
+                await userManager.AddToRoleAsync(user, await roleManager.GetRoleNameAsync(role));
+
+                if(userInfo.Password != null)
+                {
+
+                    var passwordValidator = new PasswordValidator<User>();
+                    var result = await passwordValidator.ValidateAsync(userManager, user, userInfo.Password);
+                    if (result.Succeeded)
+                    {
+                        await userManager.RemovePasswordAsync(user);
+                        await userManager.AddPasswordAsync(user, userInfo.Password);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Password", "Such password format isn`t valid");
+
+                        ViewBag.Roles = roleManager.Roles.ToList().Where(x => x.Name != "SuperAdmin");
+                        return View("EditUser", userInfo);
+                    }
+
+                }
+
+                return RedirectToAction("Users");
+            }
+
+            ViewBag.Roles = roleManager.Roles.ToList().Where(x => x.Name != "SuperAdmin");
+            return View("EditUser", userInfo);
         }
     }
 }

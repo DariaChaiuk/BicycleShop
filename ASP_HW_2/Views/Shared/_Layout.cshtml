@@ -10,9 +10,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container">
-                <img class="home-image border rounded" src="https://mudsweatandgears.ca/wp-content/uploads/2021/01/Hardtail1c.jpg" />
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3 d-flex justify-content-center">
+            <div class="container m-0">
+                <img class="home-image border rounded bike-img" src="https://mudsweatandgears.ca/wp-content/uploads/2021/01/Hardtail1c.jpg" />
                 <div class="navbar-brand text-danger">Bicycle shop</div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -23,37 +23,49 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
-                            </li>
-                        }
-                        @if (User.IsInRole("SuperAdmin"))
-                        {
-                            <li>
-                                <a class="nav-link text-light" asp-controller="Admin" asp-action="EditUserRole">Users</a>
-                            </li>
-                        }
-
-                    <li class="menu-buttons">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <a class="btn btn-secondary ml-auto d-flex align-items-center" asp-controller="Account" asp-action="Logout">Logout</a>
-                            <div class="text-danger p-2 mr-1 ">
-                                <div>Hello,</div>
-                                <div>@User.Identity.Name</div>
-                            </div>
-                        }
-                        else
-                        {
-                            <a class="btn btn-secondary" asp-controller="Account" asp-action="Login">Login</a>
-                            <a class="btn btn-secondary" asp-controller="Account" asp-action="Register">Register</a>
-                        }
-                    </li>
 
                         <li class="nav-item cart-small">
                             <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="Index">Cart</a>
+                        </li>
+
+                        <li>
+                            <div class="dropdown mr-1">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Options
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                    <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="User" asp-action="UserEdit" >My account</a>
+
+
+                                    @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+                                    {
+                                        <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+                                    }
+                                    @if (User.IsInRole("SuperAdmin"))
+                                    {
+                                        <a class="nav-link text-dark dropdown-item" asp-controller="Admin" asp-action="Users">Users</a>
+                                    }
+
+
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="menu-buttons">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="btn btn-secondary ml-auto d-flex align-items-center" asp-controller="Account" asp-action="Logout">Logout</a>
+                                <div class="text-danger p-2 mr-1 ">
+                                    <div>Hello,</div>
+                                    <div>@User.Identity.Name</div>
+                                </div>
+                            }
+                            else
+                            {
+                                <a class="btn btn-secondary" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="btn btn-secondary" asp-controller="Account" asp-action="Register">Register</a>
+                            }
                         </li>
 
                     </ul>
@@ -62,13 +74,13 @@
                 <div class="login-buttons">
                     @if (User.Identity.IsAuthenticated)
                     {
-                    <div class="d-flex align-items-center">
-                        <a class="btn btn-secondary  ml-auto" asp-controller="Account" asp-action="Logout">Logout</a>
-                        <div class="text-danger p-2 mr-1 ">
-                            <div>Hello,</div>
-                            <div>@User.Identity.Name</div>
+                        <div class="d-flex align-items-center">
+                            <a class="btn btn-secondary  ml-auto" asp-controller="Account" asp-action="Logout">Logout</a>
+                            <div class="text-danger p-2 mr-1 ">
+                                <div>Hello,</div>
+                                <div>@User.Identity.Name</div>
+                            </div>
                         </div>
-                    </div>
                     }
                     else
                     {
@@ -79,7 +91,7 @@
 
                 @{
                     var parms = new Dictionary<string, string>
-                            {
+                                    {
                         {"returnUrl", "/" }
                     };
                 }

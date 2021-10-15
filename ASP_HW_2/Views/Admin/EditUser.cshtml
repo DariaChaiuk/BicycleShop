@@ -1,0 +1,67 @@
+﻿@model ASP_HW_2.Models.ViewModels.EditUserInfoViewModel
+
+<body class="bg-secondary">
+
+    <div class="w-100 d-flex justify-content-center">
+        <h1 class="text-light">Edit user</h1>
+    </div>
+
+    <form id="editUser" asp-action="EditUser" asp-controller="Admin" asp-antiforgery="true" class="d-flex w-100 flex-column">
+        <div class="w-25 d-flex align-self-center flex-column text-light w-100">
+                @Html.HiddenFor(x => x.UserId)
+            <div class="d-flex justify-content-between w-100">
+                @Html.LabelFor(x => x.UserName, "User name")
+                @Html.TextBoxFor(x => x.UserName, new { @type = "text" })
+            </div>
+
+            <div class="d-flex justify-content-between w-100">
+                @Html.LabelFor(x => x.Email)
+                @Html.TextBoxFor(x => x.Email, new { @type = "email" })
+            </div>
+
+            <div class="text-light text-center">Enter password if you want to change it</div>
+
+            <div class="d-flex justify-content-between w-100">
+                @Html.LabelFor(x => x.Password)
+                @Html.TextBoxFor(x => x.Password, new { @type = "password" })
+            </div>
+            <div class="d-flex justify-content-between w-100">
+                @Html.LabelFor(x => x.ConfirmPassword, "Confirm password")
+                @Html.TextBoxFor(x => x.ConfirmPassword, new { @type = "password" })
+            </div>
+            <div class="d-flex justify-content-between w-100">
+                @Html.LabelFor(x => x.RoleName, "Choose user role")
+                <select id="role" name="RoleName">
+                    @foreach (var item in ViewBag.Roles)
+                    {
+
+
+                        @if (item.Name == Model.RoleName)
+                        {
+                            <option value="@item.Name" selected>@item.Name</option>
+                        }
+
+                        else
+                        {
+                            <option value="@item.Name">@item.Name</option>
+                        }
+
+                    }
+                </select>
+            </div>
+
+        </div>
+        <div class="text-center">
+            @Html.ValidationMessageFor(x => x.UserName)
+            @Html.ValidationMessageFor(x => x.Email)
+            @Html.ValidationMessageFor(x => x.Password)
+            @Html.ValidationMessageFor(x => x.ConfirmPassword)
+        </div>
+
+    </form>
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="w-100 d-flex justify-content-center mt-3">
+        <input form="editUser" type="submit" value="Edit user" class="btn btn-light w-50" />
+    </div>
+
+</body>

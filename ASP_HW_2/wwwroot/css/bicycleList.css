@@ -28,6 +28,10 @@
     .inputs-container input{
         width: 100%!important;
     }
+
+    .bike-img{
+        display: none;
+    }
 }
 
 @media (max-width: 850px) {
@@ -40,7 +44,7 @@
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 710px) {
     .cart-small {
         margin: 0!important;
     }
@@ -61,5 +65,11 @@
 
     .menu-buttons{
         display: flex;
+        margin-left: 0!important;
+        margin-top: 10px;
+    }
+
+    .menu-buttons a{
+        margin-left: 0!important;
     }
 }
