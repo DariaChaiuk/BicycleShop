@@ -20,6 +20,10 @@
     display: none;
 }
 
+.input-checkbox{
+    width: 100px!important
+}
+
 @media (max-width: 990px) {
     .inputs-container{
         flex-direction: column;

@@ -25,6 +25,28 @@ namespace ASP_HW_2.Models
         [Required(ErrorMessage = "Enter country")]
         public string Country { get; set; }
         public Popularity Popularity { get; set; }
+
+        static public Popularity StringToPopularity(string popularity)
+        {
+            switch (popularity.ToUpper())
+            {
+                case "ONE":
+                    return Popularity.one;
+
+                case "TWO":
+                    return Popularity.two;
+        
+                case "THREE":
+                    return Popularity.three;
+                   
+                case "FOUR":
+                    return Popularity.four;
+                    
+                default:
+                    return Popularity.five;
+                    
+            }
+        }
     }
 
     public enum Popularity
@@ -35,4 +57,5 @@ namespace ASP_HW_2.Models
         four,
         five
     }
+
 }

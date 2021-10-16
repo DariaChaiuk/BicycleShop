@@ -163,3 +163,4 @@ C:\Users\Daria\source\repos\ASP_HW_2\ASP_HW_2\obj\Debug\netcoreapp3.1\Razor\View
 C:\Users\Daria\source\repos\ASP_HW_2\ASP_HW_2\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditUser.cshtml.g.cs
 C:\Users\Daria\source\repos\ASP_HW_2\ASP_HW_2\obj\Debug\netcoreapp3.1\ASP_HW_2.csprojAssemblyReference.cache
 C:\Users\Daria\source\repos\ASP_HW_2\ASP_HW_2\obj\Debug\netcoreapp3.1\Razor\Views\User\UserEdit.cshtml.g.cs
+C:\Users\Daria\source\repos\ASP_HW_2\ASP_HW_2\obj\Debug\netcoreapp3.1\Razor\Views\Home\BicyclesList.cshtml.g.cs

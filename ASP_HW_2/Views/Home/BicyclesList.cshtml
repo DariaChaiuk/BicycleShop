@@ -1,0 +1,87 @@
+﻿@foreach (var bicycle in Model.Bicycles)
+{
+    <div class="d-flex border border-danger rounded mb-2 p-3 align-items-center bg-white bicycle-container">
+        <div class="w-50 bicycle-small">
+            <img class="w-100 p-4" src="@bicycle.ImageUrl" />
+        </div>
+        <div class="w-50 d-flex flex-column align-items-center bicycle-small">
+            <div class="bg-dark text-light w-100 text-center rounded border mb-2">Info</div>
+            <div class="d-flex justify-content-between w-75">
+                <div>Popularity:</div>
+                <div class="d-flex justify-content-end">
+                    @if (bicycle.Popularity == ASP_HW_2.Models.Popularity.one)
+                    {
+                        <img class="popularity-star" src="https://clipart-best.com/img/star/star-clip-art-38.png" />
+                    }
+                    @if (bicycle.Popularity == ASP_HW_2.Models.Popularity.two)
+                    {
+                        @for (int i = 0; i < 2; i++)
+                        {
+                            <img class="popularity-star" src="https://clipart-best.com/img/star/star-clip-art-38.png" />
+                        }
+                    }
+                    @if (bicycle.Popularity == ASP_HW_2.Models.Popularity.three)
+                    {
+                        @for (int i = 0; i < 3; i++)
+                        {
+                            <img class="popularity-star" src="https://clipart-best.com/img/star/star-clip-art-38.png" />
+                        }
+                    }
+                    @if (bicycle.Popularity == ASP_HW_2.Models.Popularity.four)
+                    {
+                        @for (int i = 0; i < 4; i++)
+                        {
+                            <img class="popularity-star" src="https://clipart-best.com/img/star/star-clip-art-38.png" />
+                        }
+                    }
+                    @if (bicycle.Popularity == ASP_HW_2.Models.Popularity.five)
+                    {
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            <img class="popularity-star" src="https://clipart-best.com/img/star/star-clip-art-38.png" />
+                        }
+                    }
+
+                </div>
+            </div>
+            <div class="d-flex justify-content-between w-75">
+                <div>Model:</div>
+                <div>@bicycle.Model</div>
+            </div>
+            <div class="d-flex justify-content-between w-75">
+                <div>Price:</div>
+                <div>@bicycle.Price $</div>
+            </div>
+            <div class="bg-dark text-light w-100 text-center rounded border my-2">Details</div>
+            <div class="d-flex justify-content-between w-75">
+                <div>Company:</div>
+                <div>@bicycle.Company</div>
+            </div>
+            <div class="d-flex justify-content-between w-75">
+                <div>Year:</div>
+                <div>@bicycle.Year</div>
+            </div>
+            <div class="d-flex justify-content-between w-75 pb-2">
+                <div>Country:</div>
+                <div>@bicycle.Country</div>
+            </div>
+
+            <a href="~/Home/Order/@bicycle.BicycleId" class="btn btn-secondary w-100">Order</a>
+
+            @using (Html.BeginForm("AddToCart", "Cart", new { bicycleId = bicycle.BicycleId, returnUrl = Context.Request.Path }, FormMethod.Post, null, new { @class = "w-100" }))
+            {
+                <input type="submit" value="+ Add to cart" class="btn btn-secondary w-100 mt-1" />
+            }
+
+        </div>
+    </div>
+}
+
+<div class="d-flex justify-content-around">
+
+    <button value="@ViewBag.IsFinished" class="btn btn-light text-dark" id="back">Back</button>   
+    <button value="@ViewBag.IsFinished" class="btn btn-light text-dark" id="next">Next</button>
+
+
+
+</div>
