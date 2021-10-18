@@ -40,6 +40,7 @@ namespace ASP_HW_2
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStatusCodePages("text/html", "<h1>Error 404</h1>");
 
             app.UseStaticFiles();
             app.UseRouting();
@@ -53,6 +54,7 @@ namespace ASP_HW_2
                     name: "Default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
+                endpoints.MapControllers();
             });
         }
     }
