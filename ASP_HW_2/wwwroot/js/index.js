@@ -1,11 +1,23 @@
 ﻿
 if (location.pathname === "/index.html") {
 
-    getBicycles();
+    document.getElementById("loginButton").addEventListener('click', function (e) {
+        console.log("sendToken")
+        getTokenAsync();
+    })
+
+    if (localStorage.getItem('access_token')) {
+        getBicycles();
+        document.getElementById("loginForm").style.display = 'none';
+        document.getElementById("add").style.display = 'block';
+    }
+    else {
+        document.getElementById("add").style.display = 'none';
+    }
 
     document.getElementById('add').addEventListener("click", function () {
 
-        location.pathname = '/edit-page.html'
+        location.pathname = '/edit-page.html';
     })
 
     sessionStorage.clear();
@@ -72,6 +84,35 @@ else {
 
 }
 
+
+async function getTokenAsync() {
+
+    const response = await fetch('api/account/token', {
+
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+                login: document.querySelector('#login').value,
+                password: document.querySelector('#password').value
+        })
+    })
+
+    console.log(response);
+
+    const data = await response.json();
+
+    if (response.ok === true) {
+        console.log(data.access_token)
+        document.getElementById("loginForm").style.display = 'none';
+
+        localStorage.setItem('access_token', data.access_token)
+
+        getBicycles();
+    }
+    else {
+        console.log(response.status, data.error)
+    }
+}
 
 function createHtmlBicycle(bicycle) {
     let divContainer = document.createElement("div");
@@ -186,7 +227,8 @@ async function deleteBicycle(bicycleId) {
 
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'bearer ' + localStorage.getItem('access_token')
         }
     })
 
@@ -203,10 +245,10 @@ async function editBicycle({ id, popularity, imageUrl, model, price, company, ye
     const response = await fetch('/api/bicycles', {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'bearer ' + localStorage.getItem('access_token')
         },
         body: JSON.stringify({
-
             bicycleId: +id,
             popularity: +popularity,
             imageUrl,
@@ -294,7 +336,8 @@ async function createBicycle({popularity, imageUrl, model, price, company, year,
     const response = await fetch('/api/bicycles', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'bearer ' + localStorage.getItem('access_token')
         },
         body: JSON.stringify({
             imageUrl,
@@ -370,7 +413,12 @@ async function createBicycle({popularity, imageUrl, model, price, company, year,
 }
 
 async function getBicycles() {
-    const response = await fetch('api/bicycles');
+
+    const response = await fetch('api/bicycles', {
+        headers: {
+            'Authorization': 'bearer ' + localStorage.getItem('access_token')
+        }
+    })
     if (response.ok === true) {
         const bicycles = await response.json();
 
@@ -380,3 +428,4 @@ async function getBicycles() {
 
     }
 }
+
